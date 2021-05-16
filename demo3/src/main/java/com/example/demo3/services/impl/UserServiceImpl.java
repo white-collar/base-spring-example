@@ -1,7 +1,7 @@
 package com.example.demo3.services.impl;
 
-import com.example.demo3.UserRepository;
-import com.example.demo3.dto.request.UserLoginDto;
+import com.example.demo3.persistense.entities.UserRepository;
+import com.example.demo3.dto.request.UserLoginDTO;
 import com.example.demo3.dto.response.UserDto;
 import com.example.demo3.persistense.entities.User;
 import com.example.demo3.services.UserService;
@@ -30,10 +30,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User save(UserLoginDto userLoginDto) {
-        return userRepository.save(new User(
-                userLoginDto.getUsername(),
-                userLoginDto.getPassword()
-        ));
+    public User save(UserLoginDTO userLoginDto) {
+       return new User("username", "password", "email");
     }
 }
