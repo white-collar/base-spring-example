@@ -1,12 +1,16 @@
 package com.example.demo3.services.impl;
 
-import com.example.demo3.UserRepository;
-import com.example.demo3.dto.request.UserLoginDto;
+import com.example.demo3.repository.UserRepository;
 import com.example.demo3.dto.response.UserDto;
 import com.example.demo3.persistense.entities.User;
 import com.example.demo3.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -30,10 +34,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User save(UserLoginDto userLoginDto) {
-        return userRepository.save(new User(
-                userLoginDto.getUsername(),
-                userLoginDto.getPassword()
-        ));
+    public Page<User> getUsers(Pageable pageable) {
+        return userRepository.findAll(pageable);
     }
+
+    @Override
+    public Optional<User> getUser(Integer id) {
+        return userRepository.findById(id);
+    }
+
+
 }
